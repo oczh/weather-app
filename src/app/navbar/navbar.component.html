@@ -1,5 +1,13 @@
-<ul ngbNav [activeId]="route.fragment | async" class="nav-tabs">
-    <li *ngFor="let link of links" [ngbNavItem]="link.fragment">
-        <a ngbNavLink [routerLink]="link.fragment">{{ link.title }}</a>
-    </li>
-</ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/home">Weather forcase</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul ngbNav [activeId]="route.fragment | async" class="nav-tabs navbar-nav mr-auto">
+            <li *ngFor="let link of links" [ngbNavItem]="link.fragment">
+                <a ngbNavLink [routerLink]="link.fragment">{{ link.title }}</a>
+            </li>
+        </ul>
+    </div>
+</nav>
