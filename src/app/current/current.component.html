@@ -1,1 +1,5 @@
 <p>current works!</p>
+<span>{{requestServise.currentWeather | json}}</span>
+<p>{{requestServise.currentWeather?.name}}</p>
+<p>{{requestServise.currentWeather?.main.temp}}</p>
+<p>{{requestServise.currentWeather?.weather[0].main}}</p>
