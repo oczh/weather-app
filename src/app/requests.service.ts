@@ -1,9 +1,52 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-type coordinates = {
-  lat: number;
+interface currentWeatherObject {
+  coord: Coord;
+  weather: Weather[];
+  base: string;
+  main: Main;
+  visibility: number;
+  wind: Wind;
+  clouds: Clouds;
+  dt: number;
+  sys: Sys;
+  timezone: number;
+  id: number;
+  name: string;
+  cod: number;
+}
+interface Sys {
+  type: number;
+  id: number;
+  country: string;
+  sunrise: number;
+  sunset: number;
+}
+interface Clouds {
+  all: number;
+}
+interface Wind {
+  speed: number;
+  deg: number;
+}
+interface Main {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
+}
+interface Weather {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+interface Coord {
   lon: number;
+  lat: number;
 }
 
 @Injectable({
@@ -13,9 +56,9 @@ type coordinates = {
 export class RequestsService {
   appid: string;
   lang: string;
-  coord = {} as coordinates;
+  coord = {} as Coord;
   units: string; 
-  currentWeather: any;
+  currentWeather: currentWeatherObject;
 
   constructor(private http: HttpClient) { 
     this.appid = '6c46aa43db7539a6daf11a763626b3d2';
@@ -30,7 +73,7 @@ export class RequestsService {
       this.getCurentRequest().subscribe({
         next: (v) =>{ 
           console.log(v)
-          this.currentWeather = v
+          this.currentWeather = v;
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete') 
@@ -38,12 +81,12 @@ export class RequestsService {
     })
   }
 
-  makeCurrentURL(language: string, coordinates: coordinates, api: string, unit: string){
+  makeCurrentURL(language: string, coordinates: Coord, api: string, unit: string){
   return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid=${api}&units=${unit}`
   }
 
   getCurentRequest() {
-    return this.http.get<RequestsService>(this.makeCurrentURL(this.lang, this.coord, this.appid, this.units));
+    return this.http.get<currentWeatherObject>(this.makeCurrentURL(this.lang, this.coord, this.appid, this.units));
   }   
 }
 
