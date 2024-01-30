@@ -10,8 +10,10 @@ type weatherDataObj = {
   cloudness: number;
   pressure: number;
   humindy: number;
+  sunrise: number;
   sunset: number;
-  rain: number
+  rain?: number;
+  snow?: number;
 }
 
 interface currentWeatherObject {
@@ -28,6 +30,8 @@ interface currentWeatherObject {
   id: number;
   name: string;
   cod: number;
+  rain?: Rain;
+  snow?: Snow;
 }
 interface Sys {
   type: number;
@@ -60,6 +64,16 @@ interface Weather {
 interface Coord {
   lon: number;
   lat: number;
+}
+
+interface Rain {
+  '1h' : number;
+  '3h' : number;
+}
+
+interface Snow {
+  '1h' : number;
+  '3h' : number;
 }
 
 @Injectable({
@@ -103,10 +117,21 @@ export class RequestsService {
     return this.http.get<currentWeatherObject>(this.makeCurrentURL(this.lang, this.coord, this.appid, this.units));
   }   
 
-  makeCurrentWeatherObject(requests : currentWeatherObject){
-    this.currentWeatherData.locaton = requests.name; 
-    this.currentWeatherData.weather_icon = requests.weather[0].icon;
-    this.currentWeatherData.temperature = requests.main.temp;
+  makeCurrentWeatherObject(request : currentWeatherObject){
+    this.currentWeatherData.locaton = request.name; 
+    this.currentWeatherData.weather_icon = request.weather[0].icon;
+    this.currentWeatherData.weather = request.weather[0].main;
+    this.currentWeatherData.temperature = request.main.temp;
+    this.currentWeatherData.windSpeed = request.wind.speed;
+    this.currentWeatherData.cloudness = request.clouds.all;
+    this.currentWeatherData.pressure = request.main.pressure;
+    this.currentWeatherData.humindy = request.main.humidity;
+    this.currentWeatherData.sunrise = request.sys.sunrise;
+    this.currentWeatherData.sunset = request.sys.sunset;
+    this.currentWeatherData.rain = request.rain?.['1h'];
+    this.currentWeatherData.snow = request.snow?.['1h'];
+    //var s = new Date(1504095567183).toLocaleDateString("en-US")
+
     
   }
 }
