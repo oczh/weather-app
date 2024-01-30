@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequestsService } from '../requests.service';
 
 @Component({
   selector: 'app-current',
@@ -7,21 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class CurrentComponent implements OnInit {
-  lang: string;
-  lati: number;
-  long: number;
 
-  constructor() {}
-
+  constructor(public requestServise: RequestsService) {}
+  
   ngOnInit(): void {
-    this.lang = navigator.language;
-    console.log(`browsers language: ${this.lang}`);
-    navigator.geolocation.getCurrentPosition((data) => {
-      this.lati = data.coords.latitude;
-      this.long = data.coords.longitude;
-      console.log(`browsers position:
-      geolocation coordinates latitude: ${this.lati}, 
-      geolocation coordinates longitude: ${this.long}`)
-    });
+    this.requestServise.getCurrentWeather();
   }
 }
