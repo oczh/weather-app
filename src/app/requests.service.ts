@@ -1,6 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+type weatherDataObj = {
+  locaton: string;
+  weather_icon: string;
+  weather: string;
+  temperature : number;
+  windSpeed: number;
+  cloudness: number;
+  pressure: number;
+  humindy: number;
+  sunset: number;
+  rain: number
+}
+
 interface currentWeatherObject {
   coord: Coord;
   weather: Weather[];
@@ -59,6 +72,7 @@ export class RequestsService {
   coord = {} as Coord;
   units: string; 
   currentWeather: currentWeatherObject;
+  currentWeatherData : weatherDataObj
 
   constructor(private http: HttpClient) { 
     this.appid = '6c46aa43db7539a6daf11a763626b3d2';
@@ -88,5 +102,12 @@ export class RequestsService {
   getCurentRequest() {
     return this.http.get<currentWeatherObject>(this.makeCurrentURL(this.lang, this.coord, this.appid, this.units));
   }   
+
+  makeCurrentWeatherObject(requests : currentWeatherObject){
+    this.currentWeatherData.locaton = requests.name; 
+    this.currentWeatherData.weather_icon = requests.weather[0].icon;
+    this.currentWeatherData.temperature = requests.main.temp;
+    
+  }
 }
 
