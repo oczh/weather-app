@@ -10,7 +10,7 @@ type weatherDataObj = {
   cloudness: number;
   pressure: number;
   humindy: number;
-  sunrise: Date;
+  sunrise: string;
   sunset: string;
   rain?: number;
   snow?: number;
@@ -127,7 +127,7 @@ export class RequestsService {
     this.currentWeatherData.cloudness = request.clouds.all;
     this.currentWeatherData.pressure = request.main.pressure;
     this.currentWeatherData.humindy = request.main.humidity;
-    this.currentWeatherData.sunrise = new Date(request.sys.sunrise * 1000);
+    this.currentWeatherData.sunrise = this.formatedDate(request.sys.sunrise);
     this.currentWeatherData.sunset = this.formatedDate(request.sys.sunset);
     this.currentWeatherData.rain = request.rain?.['1h'];
     this.currentWeatherData.snow = request.snow?.['1h'];    

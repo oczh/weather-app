@@ -2,31 +2,30 @@
 <span>{{requestServise.currentWeather | json}}</span>
 <span>{{requestServise.currentWeatherData | json}}</span>
 -->
-<table class="table table-bordered">
+<table class="table table-bordered my-5">
   <thead>
     <tr>
       <th scope="col">Location</th>
       <th scope="col">Weather icon</th>
       <th scope="col">Weather</th>
-      <th scope="col">Temperature</th>
-      <th scope="col">Wind speed</th>
-      <th scope="col">Cloudness</th>
-      <th scope="col">Pressure</th>
-      <th scope="col">Humindy</th>
-      <th scope="col">Sunrise</th>
-      <th scope="col">Sunset</th>
-      <th scope="col">Rain</th>
-      <th scope="col">Snow</th>
+      <th scope="col">Temperature [celsius]</th>
+      <th scope="col">Wind speed [meter/sec]</th>
+      <th scope="col">Cloudness [%]</th>
+      <th scope="col">Pressure [hPa]</th>
+      <th scope="col">Humindy [%]</th>
+      <th scope="col">Sunrise [hh:mm]</th>
+      <th scope="col">Sunset [hh:mm]</th>
+      <th scope="col">Rain [mm/1h]</th>
+      <th scope="col">Snow [mm/1h]</th>
       <th scope="col">Favourite</th>
       <th scope="col">Cancel</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">{{requestServise.currentWeatherData.location}}
-      </th>
+      <th scope="row">{{requestServise.currentWeatherData.location}}</th>
       <td>
-        <img style="width: 6rem;"  alt="Weather icon"
+        <img style="width: 4rem;"  alt="Weather icon"
           src="http://openweathermap.org/img/w/{{requestServise.currentWeatherData.weather_icon}}.png">
       </td>
       <td>{{requestServise.currentWeatherData.weather}}</td>
