@@ -8,10 +8,20 @@ import { RequestsService } from '../requests.service';
 })
 
 export class CurrentComponent implements OnInit {
+  //akkor ezt hogy lehet beadni típusnak?
+  //weatherData : RequestsService.weatherDataObj
+  keys : string[]
+  datas : Array<any>
 
-  constructor(public requestServise: RequestsService) {}
+  constructor(public requestServise: RequestsService) {
+    this.keys = Object.keys(requestServise.currentWeatherData)
+  }
   
   ngOnInit(): void {
     this.requestServise.getCurrentWeather();
+    console.log(this.requestServise.currentWeatherData)
+    console.log(Object.keys(this.requestServise.currentWeatherData)) //miért nem hajlandó kiírni??
+    console.log(this.keys)
+    
   }
 }

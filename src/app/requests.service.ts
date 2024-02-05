@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 type weatherDataObj = {
-  locaton: string;
+  location: string;
   weather_icon: string;
   weather: string;
   temperature : number;
@@ -10,8 +10,8 @@ type weatherDataObj = {
   cloudness: number;
   pressure: number;
   humindy: number;
-  sunrise: number;
-  sunset: number;
+  sunrise: Date;
+  sunset: string;
   rain?: number;
   snow?: number;
 }
@@ -86,7 +86,7 @@ export class RequestsService {
   coord = {} as Coord;
   units: string; 
   currentWeather: currentWeatherObject;
-  currentWeatherData : weatherDataObj
+  currentWeatherData = {} as weatherDataObj;
 
   constructor(private http: HttpClient) { 
     this.appid = '6c46aa43db7539a6daf11a763626b3d2';
@@ -94,17 +94,18 @@ export class RequestsService {
     this.units = 'metric';
   }
 
-  getCurrentWeather(){
+  getCurrentWeather() {
     navigator.geolocation.getCurrentPosition((data) => {
       this.coord.lat = data.coords.latitude;
       this.coord.lon = data.coords.longitude;
-      this.getCurentRequest().subscribe({
+      this.getCurrentRequest().subscribe({
         next: (v) =>{ 
           console.log(v)
           this.currentWeather = v;
+          this.makeCurrentWeatherObject(v);
         },
         error: (e) => console.error(e),
-        complete: () => console.info('complete') 
+        complete: () => console.info('complete')
       });
     })
   }
@@ -113,12 +114,12 @@ export class RequestsService {
   return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid=${api}&units=${unit}`
   }
 
-  getCurentRequest() {
+  getCurrentRequest() {
     return this.http.get<currentWeatherObject>(this.makeCurrentURL(this.lang, this.coord, this.appid, this.units));
   }   
 
   makeCurrentWeatherObject(request : currentWeatherObject){
-    this.currentWeatherData.locaton = request.name; 
+    this.currentWeatherData.location = request.name; 
     this.currentWeatherData.weather_icon = request.weather[0].icon;
     this.currentWeatherData.weather = request.weather[0].main;
     this.currentWeatherData.temperature = request.main.temp;
@@ -126,13 +127,17 @@ export class RequestsService {
     this.currentWeatherData.cloudness = request.clouds.all;
     this.currentWeatherData.pressure = request.main.pressure;
     this.currentWeatherData.humindy = request.main.humidity;
-    this.currentWeatherData.sunrise = request.sys.sunrise;
-    this.currentWeatherData.sunset = request.sys.sunset;
+    this.currentWeatherData.sunrise = new Date(request.sys.sunrise * 1000);
+    this.currentWeatherData.sunset = this.formatedDate(request.sys.sunset);
     this.currentWeatherData.rain = request.rain?.['1h'];
-    this.currentWeatherData.snow = request.snow?.['1h'];
-    //var s = new Date(1504095567183).toLocaleDateString("en-US")
+    this.currentWeatherData.snow = request.snow?.['1h'];    
+  }
 
-    
+  formatedDate(unix_timestamp : number){
+    const date = new Date(unix_timestamp * 1000);
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    return hours + ':' + minutes;
   }
 }
 

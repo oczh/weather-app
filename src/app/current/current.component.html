@@ -1,7 +1,54 @@
-<p>current works!</p>
- 
+<!-- 
 <span>{{requestServise.currentWeather | json}}</span>
-<!--
-<p>{{requestServise.currentWeather?.name}}</p>
-<p>{{requestServise.currentWeather?.main.temp}}</p>
-<p>{{requestServise.currentWeather?.weather[0].main}}</p> -->
+<span>{{requestServise.currentWeatherData | json}}</span>
+-->
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Location</th>
+      <th scope="col">Weather icon</th>
+      <th scope="col">Weather</th>
+      <th scope="col">Temperature</th>
+      <th scope="col">Wind speed</th>
+      <th scope="col">Cloudness</th>
+      <th scope="col">Pressure</th>
+      <th scope="col">Humindy</th>
+      <th scope="col">Sunrise</th>
+      <th scope="col">Sunset</th>
+      <th scope="col">Rain</th>
+      <th scope="col">Snow</th>
+      <th scope="col">Favourite</th>
+      <th scope="col">Cancel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{requestServise.currentWeatherData.location}}
+      </th>
+      <td>
+        <img style="width: 6rem;"  alt="Weather icon"
+          src="http://openweathermap.org/img/w/{{requestServise.currentWeatherData.weather_icon}}.png">
+      </td>
+      <td>{{requestServise.currentWeatherData.weather}}</td>
+      <td>{{requestServise.currentWeatherData.temperature}}</td>
+      <td>{{requestServise.currentWeatherData.windSpeed}}</td>
+      <td>{{requestServise.currentWeatherData.cloudness}}</td>
+      <td>{{requestServise.currentWeatherData.pressure}}</td>
+      <td>{{requestServise.currentWeatherData.humindy}}</td>
+      <td>{{requestServise.currentWeatherData.sunrise}}</td>
+      <td>{{requestServise.currentWeatherData.sunset}}</td>
+      <td>{{requestServise.currentWeatherData.rain}}</td>
+      <td>{{requestServise.currentWeatherData.snow}}</td>
+      <td>
+        <button type="button" class="btn btn-primary">
+          <i class="bi bi-heart"></i>
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger">
+          <i class="bi bi-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
