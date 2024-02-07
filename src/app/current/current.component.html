@@ -5,20 +5,19 @@
 <table class="table table-bordered my-5">
   <thead>
     <tr>
-      <th scope="col">Location</th>
-      <th scope="col">Weather icon</th>
-      <th scope="col">Weather</th>
-      <th scope="col">Temperature [celsius]</th>
-      <th scope="col">Wind speed [meter/sec]</th>
-      <th scope="col">Cloudness [%]</th>
-      <th scope="col">Pressure [hPa]</th>
-      <th scope="col">Humidity [%]</th>
-      <th scope="col">Sunrise [hh:mm]</th>
-      <th scope="col">Sunset [hh:mm]</th>
-      <th scope="col">Rain [mm/1h]</th>
-      <th scope="col">Snow [mm/1h]</th>
-      <th scope="col">Favourite location</th>
-      <th scope="col">Cancel</th>
+      <th scope="col" class="align-top">Location</th>
+      <th scope="col" class="align-top">Weather icon</th>
+      <th scope="col" class="align-top">Weather</th>
+      <th scope="col" class="align-top">Temperature [celsius]</th>
+      <th scope="col" class="align-top">Wind speed [meter/sec]</th>
+      <th scope="col" class="align-top">Cloudness [%]</th>
+      <th scope="col" class="align-top">Pressure [hPa]</th>
+      <th scope="col" class="align-top">Humidity [%]</th>
+      <th scope="col" class="align-top">Sunrise [hh:mm]</th>
+      <th scope="col" class="align-top">Sunset [hh:mm]</th>
+      <th scope="col" class="align-top">Rain [mm/1h]</th>
+      <th scope="col" class="align-top">Snow [mm/1h]</th>
+      <th scope="col" class="align-top"></th>
     </tr>
   </thead>
   <tbody>
@@ -39,14 +38,14 @@
       <td>{{requestServise.currentWeatherData.rain}}</td>
       <td>{{requestServise.currentWeatherData.snow}}</td>
       <td>
-        <button type="button" class="btn btn-primary">
-          <i class="bi bi-heart"></i>
-        </button>
-      </td>
-      <td>
-        <button type="button" class="btn btn-danger">
-          <i class="bi bi-trash"></i>
-        </button>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-primary">
+            <i class="bi bi-heart"></i>
+          </button>
+          <button type="button" class="btn btn-danger">
+            <i class="bi bi-trash"></i>
+          </button>  
+        </div>
       </td>
     </tr>
   </tbody>
