@@ -2,8 +2,8 @@
 <span>{{requestServise.currentWeather | json}}</span>
 <span>{{requestServise.currentWeatherData | json}}</span>
 -->
-<table class="table table-bordered my-5">
-  <thead>
+<table class="table-sm table-borderles my-5 equal_col_width">
+  <thead class="opacity-50">
     <tr>
       <th scope="col" class="align-top">Location</th>
       <th scope="col" class="align-top">Weather icon</th>
@@ -22,22 +22,46 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">{{requestServise.currentWeatherData.location}}</th>
-      <td>
-        <img style="width: 4rem;"  alt="Weather icon"
-          src="http://openweathermap.org/img/w/{{requestServise.currentWeatherData.weather_icon}}.png">
+      <th scope="row" class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.location}}</div>
+      </th>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">
+          <img style="width: 4rem;"  alt="Weather icon"
+            src="http://openweathermap.org/img/w/{{requestServise.currentWeatherData.weather_icon}}.png">
+        </div>
       </td>
-      <td>{{requestServise.currentWeatherData.weather}}</td>
-      <td>{{requestServise.currentWeatherData.temperature}}</td>
-      <td>{{requestServise.currentWeatherData.windSpeed}}</td>
-      <td>{{requestServise.currentWeatherData.cloudness}}</td>
-      <td>{{requestServise.currentWeatherData.pressure}}</td>
-      <td>{{requestServise.currentWeatherData.humidity}}</td>
-      <td>{{requestServise.currentWeatherData.sunrise}}</td>
-      <td>{{requestServise.currentWeatherData.sunset}}</td>
-      <td>{{requestServise.currentWeatherData.rain}}</td>
-      <td>{{requestServise.currentWeatherData.snow}}</td>
-      <td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.weather}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.temperature}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.windSpeed}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.cloudness}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.pressure}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.humidity}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.sunrise}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.sunset}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.rain}}</div>
+      </td>
+      <td class="transparent">
+        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.snow}}</div>
+      </td>
+      <td class="transparent align-midle">
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-primary">
             <i class="bi bi-heart"></i>
