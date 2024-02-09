@@ -9,7 +9,8 @@ import { RequestsService } from '../requests.service';
 
 export class CurrentComponent implements OnInit {
 
-  constructor(public requestServise: RequestsService) {}
+  constructor(public requestServise: RequestsService) {
+  }
   
   ngOnInit(): void {
     this.requestServise.getCurrentWeather();
