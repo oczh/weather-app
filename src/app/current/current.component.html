@@ -2,75 +2,77 @@
 <span>{{requestServise.currentWeather | json}}</span>
 <span>{{requestServise.currentWeatherData | json}}</span>
 -->
-<table class="table-sm table-borderles my-5 equal_col_width">
-  <thead class="opacity-50">
-    <tr>
-      <th scope="col" class="align-top">Location</th>
-      <th scope="col" class="align-top">Weather icon</th>
-      <th scope="col" class="align-top">Weather</th>
-      <th scope="col" class="align-top">Temperature [celsius]</th>
-      <th scope="col" class="align-top">Wind speed [meter/sec]</th>
-      <th scope="col" class="align-top">Cloudness [%]</th>
-      <th scope="col" class="align-top">Pressure [hPa]</th>
-      <th scope="col" class="align-top">Humidity [%]</th>
-      <th scope="col" class="align-top">Sunrise [hh:mm]</th>
-      <th scope="col" class="align-top">Sunset [hh:mm]</th>
-      <th scope="col" class="align-top">Rain [mm/1h]</th>
-      <th scope="col" class="align-top">Snow [mm/1h]</th>
-      <th scope="col" class="align-top"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row" class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.location}}</div>
-      </th>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">
-          <img style="width: 4rem;"  alt="Weather icon"
-            src="http://openweathermap.org/img/w/{{requestServise.currentWeatherData.weather_icon}}.png">
-        </div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.weather}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.temperature}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.windSpeed}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.cloudness}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.pressure}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.humidity}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.sunrise}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.sunset}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.rain}}</div>
-      </td>
-      <td class="transparent">
-        <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.snow}}</div>
-      </td>
-      <td class="transparent align-midle">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary">
-            <i class="bi bi-heart"></i>
-          </button>
-          <button type="button" class="btn btn-danger">
-            <i class="bi bi-trash"></i>
-          </button>  
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table-sm table-borderles my-5 equal_col_width">
+    <thead class="opacity-50 bg-light">
+      <tr>
+        <th scope="col" class="align-top">Location</th>
+        <th scope="col" class="align-top">Weather icon</th>
+        <th scope="col" class="align-top">Weather</th>
+        <th scope="col" class="align-top">Temperature [celsius]</th>
+        <th scope="col" class="align-top">Wind speed [meter/sec]</th>
+        <th scope="col" class="align-top">Cloudness [%]</th>
+        <th scope="col" class="align-top">Pressure [hPa]</th>
+        <th scope="col" class="align-top">Humidity [%]</th>
+        <th scope="col" class="align-top">Sunrise [hh:mm]</th>
+        <th scope="col" class="align-top">Sunset [hh:mm]</th>
+        <th scope="col" class="align-top">Rain [mm/1h]</th>
+        <th scope="col" class="align-top">Snow [mm/1h]</th>
+        <th scope="col" class="align-top"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.location}}</div>
+        </th>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">
+            <img style="width: 4rem;"  alt="Weather icon"
+              src="http://openweathermap.org/img/w/{{requestServise.currentWeatherData.weather_icon}}.png">
+          </div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.weather}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.temperature}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.windSpeed}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.cloudness}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.pressure}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.humidity}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.sunrise}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.sunset}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.rain}}</div>
+        </td>
+        <td class="transparent">
+          <div class="box d-flex align-items-center justify-content-center">{{requestServise.currentWeatherData.snow}}</div>
+        </td>
+        <td class="transparent align-midle">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-primary">
+              <i class="bi bi-heart"></i>
+            </button>
+            <button type="button" class="btn btn-danger">
+              <i class="bi bi-trash"></i>
+            </button>  
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
