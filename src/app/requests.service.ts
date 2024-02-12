@@ -46,6 +46,7 @@ interface Clouds {
 interface Wind {
   speed: number;
   deg: number;
+  gust?: number;
 }
 interface Main {
   temp: number;
@@ -54,6 +55,9 @@ interface Main {
   temp_max: number;
   pressure: number;
   humidity: number;
+  sea_level?: number;
+  grnd_level?: number;
+  temp_kf?: number;
 }
 interface Weather {
   id: number;
@@ -74,6 +78,38 @@ interface Rain {
 interface Snow {
   '1h' : number;
   '3h' : number;
+}
+
+interface forecastWeatherObject {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: (List | string)[];
+  city: City;
+}
+interface City {
+  id: number;
+  name: string;
+  coord: Coord;
+  country: string;
+  population: number;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+interface List {
+  dt: number;
+  main: Main;
+  weather: Weather[];
+  clouds: Clouds;
+  wind: Wind;
+  visibility: number;
+  pop: number;
+  sys: Sys_forcast;
+  dt_txt: string;
+}
+interface Sys_forcast {
+  pod: string;
 }
 
 @Injectable({
@@ -114,9 +150,17 @@ export class RequestsService {
   return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid=${api}&units=${unit}`
   }
 
+  makeForcastURL(language: string, coordinates: Coord, api: string, unit: string){
+    return `api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid={API key}&units=${unit}`
+  }
+
   getCurrentRequest() {
     return this.http.get<currentWeatherObject>(this.makeCurrentURL(this.lang, this.coord, this.appid, this.units));
   }   
+
+  getForcastRequest() {
+    return this.http.get<currentWeatherObject>(this.makeForcastURL(this.lang, this.coord, this.appid, this.units));
+  }
 
   makeCurrentWeatherObject(request : currentWeatherObject){
     this.currentWeatherData.location = request.name; 
