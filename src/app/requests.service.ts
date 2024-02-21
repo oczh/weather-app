@@ -123,6 +123,8 @@ export class RequestsService {
   units: string; 
   currentWeather: currentWeatherObject;
   currentWeatherData = {} as weatherDataObj;
+  forcastWeather: forecastWeatherObject;
+  forcastWearherData = {} as weatherDataObj;
 
   constructor(private http: HttpClient) { 
     this.appid = '6c46aa43db7539a6daf11a763626b3d2';
@@ -146,12 +148,28 @@ export class RequestsService {
     })
   }
 
+  getForcastWeather() {
+    navigator.geolocation.getCurrentPosition((data) => {
+      this.coord.lat = data.coords.latitude;
+      this.coord.lon = data.coords.longitude;
+      this.getForcastRequest().subscribe({
+        next: (v) =>{ 
+          console.log(v)
+          this.forcastWeather = v;
+          //this.makeForecastWeatherObject(v);
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('complete')
+      });
+    })
+  }
+
   makeCurrentURL(language: string, coordinates: Coord, api: string, unit: string){
-  return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid=${api}&units=${unit}`
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid=${api}&units=${unit}`
   }
 
   makeForcastURL(language: string, coordinates: Coord, api: string, unit: string){
-    return `api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid={API key}&units=${unit}`
+    return `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&lang=${language}&appid=${api}&units=${unit}`
   }
 
   getCurrentRequest() {
@@ -159,7 +177,7 @@ export class RequestsService {
   }   
 
   getForcastRequest() {
-    return this.http.get<currentWeatherObject>(this.makeForcastURL(this.lang, this.coord, this.appid, this.units));
+    return this.http.get<forecastWeatherObject>(this.makeForcastURL(this.lang, this.coord, this.appid, this.units));
   }
 
   makeCurrentWeatherObject(request : currentWeatherObject){

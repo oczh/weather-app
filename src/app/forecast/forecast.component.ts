@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RequestsService } from '../requests.service';
 
 @Component({
   selector: 'app-forecast',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./forecast.component.scss']
 })
 export class ForecastComponent {
-
+  constructor(public requestServise: RequestsService) {
+  }
+  
+  ngOnInit(): void {
+    this.requestServise.getForcastWeather();
+  }
 }
