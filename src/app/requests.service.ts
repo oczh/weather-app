@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 type weatherDataObj = {
-  location: string;
+  location?: string;
+  time?: string;
   weather_icon: string;
   weather: string;
   temperature : number;
@@ -10,10 +11,15 @@ type weatherDataObj = {
   cloudness: number;
   pressure: number;
   humidity: number;
-  sunrise: string;
-  sunset: string;
+  sunrise?: string;
+  sunset?: string;
   rain?: number;
   snow?: number;
+}
+
+type forecastObj = {
+  location: string;
+  forecastArr: weatherDataObj[] 
 }
 
 interface currentWeatherObject {
@@ -84,7 +90,7 @@ interface forecastWeatherObject {
   cod: string;
   message: number;
   cnt: number;
-  list: (List | string)[];
+  list: List[];
   city: City;
 }
 interface City {
@@ -107,6 +113,8 @@ interface List {
   pop: number;
   sys: Sys_forcast;
   dt_txt: string;
+  rain?: Rain;
+  snow?: Snow;
 }
 interface Sys_forcast {
   pod: string;
@@ -124,7 +132,7 @@ export class RequestsService {
   currentWeather: currentWeatherObject;
   currentWeatherData = {} as weatherDataObj;
   forcastWeather: forecastWeatherObject;
-  forcastWearherData = {} as weatherDataObj;
+  forcastWearherData = {} as forecastObj;
 
   constructor(private http: HttpClient) { 
     this.appid = '6c46aa43db7539a6daf11a763626b3d2';
@@ -156,7 +164,8 @@ export class RequestsService {
         next: (v) =>{ 
           console.log(v)
           this.forcastWeather = v;
-          //this.makeForecastWeatherObject(v);
+          this.makeForecastWeatherObject(v);
+          console.log(this.makeForecastWeatherObject(v))
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -193,6 +202,26 @@ export class RequestsService {
     this.currentWeatherData.sunset = this.formatedDate(request.sys.sunset);
     this.currentWeatherData.rain = request.rain?.['1h'];
     this.currentWeatherData.snow = request.snow?.['1h'];    
+  }
+
+  makeForecastWeatherObject(request : forecastWeatherObject){
+    this.forcastWearherData.location = request.city.name;
+    this.forcastWearherData.forecastArr = []
+    for(let i = 0; i < request.list.length; i++){
+      let datas = {} as weatherDataObj
+      datas.time = request.list[i].dt_txt;
+      datas.weather_icon = request.list[i].weather[0].icon;
+      datas.weather = request.list[i].weather[0].main;
+      datas.temperature = request.list[i].main.temp;
+      datas.windSpeed = request.list[i].wind.speed;
+      datas.cloudness = request.list[i].clouds.all;
+      datas.pressure = request.list[i].main.pressure;
+      datas.humidity = request.list[i].main.humidity;
+      datas.rain = request.list[i].rain?.['3h'];
+      datas.snow = request.list[i].snow?.['3h'];
+      this.forcastWearherData.forecastArr.push(datas);
+    }
+    console.log(this.forcastWearherData)
   }
 
   formatedDate(unix_timestamp : number){
