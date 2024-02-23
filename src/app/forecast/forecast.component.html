@@ -1,1 +1,56 @@
-<p>forecast works!</p>
+<!--
+<p>{{requestServise.forcastWearherData | json}}</p>
+<p *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.time}}</p>
+-->
+<table>
+    <thead class="table">
+        <tr>
+            <th scope="col">Time</th>
+            <th scope="col" *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.time}}</th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Weather icon</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">
+                <div class="box d-flex align-items-center justify-content-center">
+                    <img style="width: 4rem;"  alt="Weather icon"
+                      src="http://openweathermap.org/img/w/{{data.weather_icon}}.png">
+                  </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Weather</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.weather}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Temperature [celsius]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.temperature}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Wind speed [meter/sec]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.windSpeed}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Cloudness [%]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.cloudness}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Pressure [hPa]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.pressure}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Humidity [%]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.humidity}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Rain [mm/1h]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.rain}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Snow [mm/1h]</th>
+            <td *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.snow}}</td>
+        </tr>
+    </tbody>
+</table>

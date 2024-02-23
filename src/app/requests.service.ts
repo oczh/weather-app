@@ -209,7 +209,7 @@ export class RequestsService {
     this.forcastWearherData.forecastArr = []
     for(let i = 0; i < request.list.length; i++){
       let datas = {} as weatherDataObj
-      datas.time = request.list[i].dt_txt;
+      datas.time = this.time(request.list[i].dt_txt);
       datas.weather_icon = request.list[i].weather[0].icon;
       datas.weather = request.list[i].weather[0].main;
       datas.temperature = request.list[i].main.temp;
@@ -229,6 +229,13 @@ export class RequestsService {
     const hours = date.getHours();
     const minutes = date.getMinutes();
     return hours + ':' + minutes;
+  }
+
+  time(date: string){
+    const month = new Date(date).getMonth() + 1;
+    const day = new Date(date).getDate();
+    const hours = new Date(date).getHours();
+    return month + '.' + day + '. ' + hours + 'h'
   }
 }
 
