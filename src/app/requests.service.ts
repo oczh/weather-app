@@ -234,8 +234,10 @@ export class RequestsService {
   time(date: string){
     const month = new Date(date).getMonth() + 1;
     const day = new Date(date).getDate();
+    const weekday = ["Sun","Mon","Tues","Wed","Thur","Fri","Sat"];
+    const dOfWeek = weekday[new Date(date).getDay()];
     const hours = new Date(date).getHours();
-    return month + '.' + day + '. ' + hours + 'h'
+    return dOfWeek + ' ' + month + '.' + day + '. ' + hours + 'h'
   }
 }
 
