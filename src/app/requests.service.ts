@@ -192,8 +192,8 @@ export class RequestsService {
     this.currentWeatherData.location = request.name; 
     this.currentWeatherData.weather_icon = request.weather[0].icon;
     this.currentWeatherData.weather = request.weather[0].main;
-    this.currentWeatherData.temperature = request.main.temp;
-    this.currentWeatherData.windSpeed = request.wind.speed;
+    this.currentWeatherData.temperature = Math.round(request.main.temp);
+    this.currentWeatherData.windSpeed = Math.round(request.wind.speed);
     this.currentWeatherData.cloudness = request.clouds.all;
     this.currentWeatherData.pressure = request.main.pressure;
     this.currentWeatherData.humidity = request.main.humidity;
@@ -217,8 +217,8 @@ export class RequestsService {
       })+'h';
       datas.weather_icon = request.list[i].weather[0].icon;
       datas.weather = request.list[i].weather[0].main;
-      datas.temperature = request.list[i].main.temp;
-      datas.windSpeed = request.list[i].wind.speed;
+      datas.temperature = Math.round(request.list[i].main.temp);
+      datas.windSpeed = Math.round(request.list[i].wind.speed);
       datas.cloudness = request.list[i].clouds.all;
       datas.pressure = request.list[i].main.pressure;
       datas.humidity = request.list[i].main.humidity;

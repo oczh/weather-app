@@ -1,14 +1,4 @@
 .boxes{
-    background-color: #ffffff66;
-    border-radius: 0.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5em;
-    margin: 2px;
-}
-
-.d-boxes{
     background-color: #ffffff96;
     border-radius: 0.5em;
     display: flex;
@@ -20,10 +10,24 @@
 
 .l-boxes{
     background-color: #ffffff36;
-    border-radius: 0.5em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5em;
-    margin: 2px;
+}
+
+.temp-warm{
+    background-color: red;
+}
+
+.temp-mild-w{
+    background-color: orange;
+}
+
+.temp-mild-c{
+    background-color: yellow;
+}
+
+.temp-cold{
+    background-color: green;
+}
+
+.temp-verycold{
+    background-color: blue;
 }

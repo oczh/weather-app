@@ -25,37 +25,45 @@
             <tr>
                 <th class="bg-transparent align-middle" scope="row">Weather</th>
                 <td class="bg-transparent" *ngFor="let data of requestServise.forcastWearherData.forecastArr">
-                    <div class="l-boxes">{{data.weather}}</div>
+                    <div class="boxes l-boxes">{{data.weather}}</div>
                 </td>
             </tr>
             <tr>
                 <th class="bg-transparent align-middle" scope="row">Temperature [celsius]</th>
                 <td class="bg-transparent" *ngFor="let data of requestServise.forcastWearherData.forecastArr">
-                    <div class="d-boxes">{{data.temperature}}</div>
+                    <div [ngClass]="{
+                        'temp-verycold': data.temperature <= 0,
+                        'temp-cold': data.temperature > 0 && data.temperature <= 10, 
+                        'temp-mild-c': data.temperature > 10 && data.temperature <= 20,
+                        'temp-mild-w': data.temperature > 20 && data.temperature <= 30,
+                        'temp-warm': data.temperature > 30}"
+                        class="boxes opacity-50 fw-bold">
+                            {{data.temperature}}
+                    </div>
                 </td>
             </tr>
             <tr>
                 <th class="bg-transparent align-middle" scope="row">Wind speed [meter/sec]</th>
                 <td class="bg-transparent" *ngFor="let data of requestServise.forcastWearherData.forecastArr">
-                    <div class="l-boxes">{{data.windSpeed}}</div>
+                    <div class="boxes l-boxes">{{data.windSpeed}}</div>
                 </td>
             </tr>
             <tr>
                 <th class="bg-transparent align-middle" scope="row">Cloudness [%]</th>
                 <td class="bg-transparent" *ngFor="let data of requestServise.forcastWearherData.forecastArr">
-                    <div class="d-boxes">{{data.cloudness}}</div>
+                    <div class="boxes">{{data.cloudness}}</div>
                 </td>
             </tr>
             <tr>
                 <th class="bg-transparent align-middle" scope="row">Pressure [hPa]</th>
                 <td class="bg-transparent" *ngFor="let data of requestServise.forcastWearherData.forecastArr">
-                    <div class="l-boxes">{{data.pressure}}</div>
+                    <div class="boxes l-boxes">{{data.pressure}}</div>
                 </td>
             </tr>
             <tr>
                 <th class="bg-transparent align-middle" scope="row">Humidity [%]</th>
                 <td class="bg-transparent" *ngFor="let data of requestServise.forcastWearherData.forecastArr">
-                    <div class="d-boxes">{{data.humidity}}</div>
+                    <div class="boxes">{{data.humidity}}</div>
                 </td>
             </tr>
             <tr>
