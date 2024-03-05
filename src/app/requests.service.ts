@@ -79,8 +79,14 @@ export class RequestsService {
     this.currentWeatherData.cloudness = request.clouds.all;
     this.currentWeatherData.pressure = request.main.pressure;
     this.currentWeatherData.humidity = request.main.humidity;
-    this.currentWeatherData.sunrise = this.formatedDate(request.sys.sunrise);
-    this.currentWeatherData.sunset = this.formatedDate(request.sys.sunset);
+    this.currentWeatherData.sunrise = new Date((request.sys.sunrise) * 1000 ).toLocaleTimeString(this.lang, {
+      hour: 'numeric',
+      minute:'numeric'
+    });
+    this.currentWeatherData.sunset = new Date((request.sys.sunset) * 1000 ).toLocaleTimeString(this.lang, {
+      hour: 'numeric',
+      minute:'numeric'
+    });
     this.currentWeatherData.rain = request.rain?.['1h'];
     this.currentWeatherData.snow = request.snow?.['1h'];    
   }
@@ -110,12 +116,4 @@ export class RequestsService {
     }
     console.log(this.forcastWearherData)
   }
-
-  formatedDate(unix_timestamp : number){
-    const date = new Date(unix_timestamp * 1000);
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    return hours + ':' + minutes;
-  }
 }
-
