@@ -165,7 +165,6 @@ export class RequestsService {
           console.log(v)
           this.forcastWeather = v;
           this.makeForecastWeatherObject(v);
-          console.log(this.makeForecastWeatherObject(v))
         },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
@@ -209,7 +208,13 @@ export class RequestsService {
     this.forcastWearherData.forecastArr = []
     for(let i = 0; i < request.list.length; i++){
       let datas = {} as weatherDataObj
-      datas.time = this.time(request.list[i].dt_txt);
+      datas.time = new Date(request.list[i].dt_txt).toLocaleTimeString(this.lang, {
+        weekday: 'long',
+        // month: 'short',
+        // day: 'numeric',
+        hour: "numeric",
+        dayPeriod:"short"
+      })+'h';
       datas.weather_icon = request.list[i].weather[0].icon;
       datas.weather = request.list[i].weather[0].main;
       datas.temperature = request.list[i].main.temp;
