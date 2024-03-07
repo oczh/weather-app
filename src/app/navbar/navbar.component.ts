@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  isNavbarCollapsed=true;
+
   links = [
     { title: 'Home', fragment: 'home' },
     { title: 'Current weather', fragment: 'current_weather' },

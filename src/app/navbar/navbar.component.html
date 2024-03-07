@@ -8,10 +8,11 @@
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        (click) = "isNavbarCollapsed = !isNavbarCollapsed"
         >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul ngbNav [activeId]="route.fragment | async" class="nav-tabs navbar-nav mr-auto">
             <li *ngFor="let link of links" [ngbNavItem]="link.fragment" class="nav-item">
                 <a ngbNavLink [routerLink]="link.fragment" class="nav-link">{{ link.title }}</a>
