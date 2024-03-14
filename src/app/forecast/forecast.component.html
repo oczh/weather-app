@@ -2,6 +2,7 @@
 <p>{{requestServise.forcastWearherData | json}}</p>
 <p *ngFor="let data of requestServise.forcastWearherData.forecastArr">{{data.time}}</p>
 -->
+<app-location-form></app-location-form>
 <div class="table-responsive">
     <table class="table table-sm overflow-scroll table-borderless caption-top">
         <caption>{{requestServise.forcastWearherData.location}}</caption>
