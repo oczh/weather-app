@@ -1,1 +1,12 @@
-<p>location-form works!</p>
+<form  #locationF="ngForm" (ngSubmit)="onSubmit(locationF)" novalidate>
+    <div class="form-row align-items-center opacity-30">
+      <div class="col-sm-3 my-1">
+        <label class="sr-only" for="location">Other location</label>
+        <input ngModel type="text" class="form-control" name="location" id="location" #location="ngModel" 
+          placeholder={{requestServise.forcastWearherData.location}}>
+      </div>
+      <div class="col-auto my-1">
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+    </div>
+  </form>
