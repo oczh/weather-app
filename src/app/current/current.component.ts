@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { RequestsService } from '../requests.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RequestRxService } from '../request-rx.service';
+import { Coord } from '../types_interfaces';
 
 @Component({
   selector: 'app-current',
@@ -7,12 +8,23 @@ import { RequestsService } from '../requests.service';
   styleUrls: ['./current.component.scss'],
 })
 
-export class CurrentComponent implements OnInit {
+export class CurrentComponent implements OnInit, OnDestroy {
 
-  constructor(public requestServise: RequestsService) {
-  }
-  
+  constructor(public service: RequestRxService) {
+  }  
+
   ngOnInit(): void {
-    this.requestServise.getCurrentWeather();
+    this.service.readNavigatorCoords()
+    this.service.coord$.subscribe({
+      next: (v: Coord) => {
+        console.log(this.service.coord$.getValue())
+        this.service.getCurrentData()
+      },
+      error: (e: any) => {}
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.service.coord$.unsubscribe();
   }
 }

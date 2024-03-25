@@ -125,3 +125,12 @@ export interface List {
 export interface Sys_forcast {
     pod: string;
 }
+
+export interface local_name {
+    name: string
+    local_names?: object
+    lat: number
+    lon: number
+    country: string
+    state: string
+  }
