@@ -13,6 +13,7 @@ export class RequestRxService {
   units = 'metric';
   currentWeatherData = {} as weatherDataObj;
   forcastWearherData = {} as forecastObj;
+  curWeaDatasArr : weatherDataObj[] = [];
 
   constructor(public http: HttpClient) {}
 
@@ -62,6 +63,33 @@ export class RequestRxService {
   }
 
   makeCurrentWeatherObject(request: currentWeatherObject) {
+    let datas = {} as weatherDataObj
+    datas.location = request.name;
+    datas.weather_icon = request.weather[0].icon;
+    datas.weather = request.weather[0].main;
+    datas.temperature = Math.round(request.main.temp);
+    datas.windSpeed = Math.round(request.wind.speed);
+    datas.cloudness = request.clouds.all;
+    datas.pressure = request.main.pressure;
+    datas.humidity = request.main.humidity;
+    datas.sunrise = new Date(
+        request.sys.sunrise * 1000
+      ).toLocaleTimeString(this.lang, {
+        hour: 'numeric',
+        minute: 'numeric',
+    });
+    datas.sunset = new Date(
+        request.sys.sunset * 1000
+      ).toLocaleTimeString(this.lang, {
+        hour: 'numeric',
+        minute: 'numeric',
+    });
+    datas.rain = request.rain?.['1h'];
+    datas.snow = request.snow?.['1h'];
+    this.curWeaDatasArr.push(datas)
+  }
+/** 
+  makeCurrentWeatherObject(request: currentWeatherObject) {
     this.currentWeatherData.location = request.name;
     this.currentWeatherData.weather_icon = request.weather[0].icon;
     this.currentWeatherData.weather = request.weather[0].main;
@@ -71,21 +99,21 @@ export class RequestRxService {
     this.currentWeatherData.pressure = request.main.pressure;
     this.currentWeatherData.humidity = request.main.humidity;
     this.currentWeatherData.sunrise = new Date(
-      request.sys.sunrise * 1000
-    ).toLocaleTimeString(this.lang, {
-      hour: 'numeric',
-      minute: 'numeric',
+        request.sys.sunrise * 1000
+      ).toLocaleTimeString(this.lang, {
+        hour: 'numeric',
+        minute: 'numeric',
     });
     this.currentWeatherData.sunset = new Date(
-      request.sys.sunset * 1000
-    ).toLocaleTimeString(this.lang, {
-      hour: 'numeric',
-      minute: 'numeric',
+        request.sys.sunset * 1000
+      ).toLocaleTimeString(this.lang, {
+        hour: 'numeric',
+        minute: 'numeric',
     });
     this.currentWeatherData.rain = request.rain?.['1h'];
     this.currentWeatherData.snow = request.snow?.['1h'];
   }
-
+*/
   makeForecastWeatherObject(request: forecastWeatherObject) { 
     this.forcastWearherData.location = request.city.name;
     this.forcastWearherData.forecastArr = [];

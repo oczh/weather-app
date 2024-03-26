@@ -23,45 +23,45 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr *ngFor="let currWeatherObj of service.curWeaDatasArr">
         <th scope="row" class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.location}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.location}}</div>
         </th>
         <td class="transparent">
           <div class="box d-flex align-items-center justify-content-center">
             <img style="width: 4rem;"  alt="Weather icon"
-              src="http://openweathermap.org/img/w/{{service.currentWeatherData.weather_icon}}.png">
+              src="http://openweathermap.org/img/w/{{currWeatherObj.weather_icon}}.png">
           </div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.weather}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.weather}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.temperature}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.temperature}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.windSpeed}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.windSpeed}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.cloudness}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.cloudness}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.pressure}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.pressure}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.humidity}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.humidity}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.sunrise}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.sunrise}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.sunset}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.sunset}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.rain}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.rain}}</div>
         </td>
         <td class="transparent">
-          <div class="box d-flex align-items-center justify-content-center">{{service.currentWeatherData.snow}}</div>
+          <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.snow}}</div>
         </td>
         <td class="transparent align-midle">
           <div class="btn-group" role="group" aria-label="Basic example">
