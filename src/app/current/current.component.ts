@@ -27,4 +27,8 @@ export class CurrentComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.service.coord$.unsubscribe();
   }
+
+  deleteRow(index : number){
+    this.service.curWeaDatasArr.splice(index, 1)
+  }
 }

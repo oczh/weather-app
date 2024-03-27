@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let currWeatherObj of service.curWeaDatasArr">
+      <tr *ngFor="let currWeatherObj of service.curWeaDatasArr; index as i">
         <th scope="row" class="transparent">
           <div class="box d-flex align-items-center justify-content-center">{{currWeatherObj.location}}</div>
         </th>
@@ -68,7 +68,7 @@
             <button type="button" class="btn btn-primary">
               <i class="bi bi-heart"></i>
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" (click)="deleteRow(i)">
               <i class="bi bi-trash"></i>
             </button>  
           </div>

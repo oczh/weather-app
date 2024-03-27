@@ -26,7 +26,6 @@ export class RequestRxService {
   getCoordinatesByQuery(city: string){
     this.http.get<local_name[]>(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${this.appid}`).subscribe({
       next: (v) =>{ 
-        console.log(city)
         console.log(v)
         this.coord$.next({lat: v[0].lat, lon : v[0].lon});
       },
@@ -40,7 +39,6 @@ export class RequestRxService {
       `https://api.openweathermap.org/data/2.5/weather?lat=${this.coord$.getValue().lat}&lon=${this.coord$.getValue().lon}&lang=${this.lang}&appid=${this.appid}&units=${this.units}`
     ).subscribe({
       next: (v: currentWeatherObject) => {
-        console.log(v);
         this.makeCurrentWeatherObject(v);
       },
       error: (e: any) => console.error(e),
@@ -53,9 +51,7 @@ export class RequestRxService {
       `https://api.openweathermap.org/data/2.5/forecast?lat=${this.coord$.getValue().lat}&lon=${this.coord$.getValue().lon}&lang=${this.lang}&appid=${this.appid}&units=${this.units}`
     ).subscribe({
       next: (v: forecastWeatherObject) => {
-        console.log(v);
         this.makeForecastWeatherObject(v);
-        
       },
       error: (e: any) => console.error(e),
       complete: () => console.info('complete'),
@@ -88,32 +84,7 @@ export class RequestRxService {
     datas.snow = request.snow?.['1h'];
     this.curWeaDatasArr.push(datas)
   }
-/** 
-  makeCurrentWeatherObject(request: currentWeatherObject) {
-    this.currentWeatherData.location = request.name;
-    this.currentWeatherData.weather_icon = request.weather[0].icon;
-    this.currentWeatherData.weather = request.weather[0].main;
-    this.currentWeatherData.temperature = Math.round(request.main.temp);
-    this.currentWeatherData.windSpeed = Math.round(request.wind.speed);
-    this.currentWeatherData.cloudness = request.clouds.all;
-    this.currentWeatherData.pressure = request.main.pressure;
-    this.currentWeatherData.humidity = request.main.humidity;
-    this.currentWeatherData.sunrise = new Date(
-        request.sys.sunrise * 1000
-      ).toLocaleTimeString(this.lang, {
-        hour: 'numeric',
-        minute: 'numeric',
-    });
-    this.currentWeatherData.sunset = new Date(
-        request.sys.sunset * 1000
-      ).toLocaleTimeString(this.lang, {
-        hour: 'numeric',
-        minute: 'numeric',
-    });
-    this.currentWeatherData.rain = request.rain?.['1h'];
-    this.currentWeatherData.snow = request.snow?.['1h'];
-  }
-*/
+
   makeForecastWeatherObject(request: forecastWeatherObject) { 
     this.forcastWearherData.location = request.city.name;
     this.forcastWearherData.forecastArr = [];
@@ -122,8 +93,6 @@ export class RequestRxService {
       datas.time =
         new Date(request.list[i].dt_txt).toLocaleTimeString(this.lang, {
           weekday: 'long',
-          // month: 'short',
-          // day: 'numeric',
           hour: 'numeric',
           dayPeriod: 'short',
         }) + 'h';

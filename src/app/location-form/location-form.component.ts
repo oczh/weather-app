@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { RequestsService } from '../requests.service';
 import { NgForm } from '@angular/forms';
-import { Coord, local_name } from '../types_interfaces';
 import { HttpClient } from '@angular/common/http';
 import { RequestRxService } from '../request-rx.service';
 
