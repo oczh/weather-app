@@ -18,7 +18,9 @@ export class CurrentComponent implements OnInit, OnDestroy {
     this.service.coord$.subscribe({
       next: (v: Coord) => {
         console.log(this.service.coord$.getValue())
-        this.service.getCurrentData()
+        if(this.service.coord$.getValue().lat !== 0){
+          this.service.getCurrentData();
+        }
       },
       error: (e: any) => {}
     })

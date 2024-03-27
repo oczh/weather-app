@@ -35,7 +35,7 @@ export class RequestRxService {
   }
 
   getCurrentData() {
-    return this.http.get<currentWeatherObject>(
+    this.http.get<currentWeatherObject>(
       `https://api.openweathermap.org/data/2.5/weather?lat=${this.coord$.getValue().lat}&lon=${this.coord$.getValue().lon}&lang=${this.lang}&appid=${this.appid}&units=${this.units}`
     ).subscribe({
       next: (v: currentWeatherObject) => {

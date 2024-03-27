@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-//import { RequestsService } from '../requests.service';
 import { RequestRxService } from '../request-rx.service';
 import { Coord } from '../types_interfaces';
 
@@ -18,7 +17,9 @@ export class ForecastComponent implements OnInit, OnDestroy {
     this.service.coord$.subscribe({
       next: (v: Coord) => {
         console.log(this.service.coord$.getValue())
-        this.service.getForcastData()
+        if(this.service.coord$.getValue().lat !== 0){
+          this.service.getForcastData();
+        }
       },
       error: (e: any) => {}
     })
