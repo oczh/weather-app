@@ -24,7 +24,7 @@ export class RequestRxService {
   }
   
   getCoordinatesByQuery(city: string){
-    this.http.get<local_name[]>(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${this.appid}`).subscribe({
+    this.http.get<local_name[]>(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${this.appid}`).subscribe({
       next: (v) =>{ 
         console.log(v)
         this.coord$.next({lat: v[0].lat, lon : v[0].lon});
