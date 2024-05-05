@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { RequestsService } from '../requests.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RequestRxService } from '../request-rx.service';
+import { Coord } from '../types_interfaces';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-current',
@@ -7,12 +9,31 @@ import { RequestsService } from '../requests.service';
   styleUrls: ['./current.component.scss'],
 })
 
-export class CurrentComponent implements OnInit {
+export class CurrentComponent implements OnInit, OnDestroy {
+  subscription: SubscriptionLike;
 
-  constructor(public requestServise: RequestsService) {
-  }
-  
+  constructor(public service: RequestRxService) {
+  }  
+
   ngOnInit(): void {
-    this.requestServise.getCurrentWeather();
+    this.service.readNavigatorCoords()
+    this.subscription = this.service.coord$.subscribe({
+      next: (v: Coord) => {
+        if(this.service.coord$.getValue().lat !== 0){
+          console.log(this.service.coord$.getValue())
+          this.service.getCurrentData();
+        }
+      },
+      error: (e: any) => {}
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.service.curWeaDatasArr = [];
+    this.subscription.unsubscribe();
+  }
+
+  deleteRow(index : number){
+    this.service.curWeaDatasArr.splice(index, 1)
   }
 }

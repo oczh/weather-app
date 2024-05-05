@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CurrentRoutingModule } from './current-routing.module';
 import { CurrentComponent } from './current.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { CurrentComponent } from './current.component';
   ],
   imports: [
     CommonModule,
-    CurrentRoutingModule
+    CurrentRoutingModule,
+    SharedModule
   ]
 })
 export class CurrentModule { }
