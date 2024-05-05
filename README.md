@@ -1,5 +1,7 @@
 # WeatherApp
 
+# TRY the app [HERE](https://oczh.github.io/weather-app)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 
 ## Development server
