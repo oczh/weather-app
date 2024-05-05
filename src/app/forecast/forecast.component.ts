@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RequestRxService } from '../request-rx.service';
 import { Coord } from '../types_interfaces';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-forecast',
@@ -9,15 +10,16 @@ import { Coord } from '../types_interfaces';
 })
 
 export class ForecastComponent implements OnInit, OnDestroy {
+  subscription: SubscriptionLike;
   constructor(public service: RequestRxService) {
   }
   
   ngOnInit(): void {
     this.service.readNavigatorCoords()
-    this.service.coord$.subscribe({
+    this.subscription = this.service.coord$.subscribe({
       next: (v: Coord) => {
         console.log(this.service.coord$.getValue())
-        if(this.service.coord$.getValue().lat !== 0){
+        if(this.service.coord$.getValue()?.lat !== 0){
           this.service.getForcastData();
         }
       },
@@ -26,7 +28,7 @@ export class ForecastComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.service.coord$.unsubscribe()
+    this.subscription.unsubscribe()
   }
 }
 /** 

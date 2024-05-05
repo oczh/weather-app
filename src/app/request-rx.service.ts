@@ -30,7 +30,7 @@ export class RequestRxService {
         this.coord$.next({lat: v[0].lat, lon : v[0].lon});
       },
       error: (e) => console.error(e),
-      complete: () => console.info('complete')
+      complete: () => console.info('complete: getCoordinatesByQuery')
     });
   }
 
@@ -42,7 +42,7 @@ export class RequestRxService {
         this.makeCurrentWeatherObject(v);
       },
       error: (e: any) => console.error(e),
-      complete: () => console.info('complete'),
+      complete: () => console.info('complete: getCurrentData'),
     });
   }
 
@@ -54,7 +54,7 @@ export class RequestRxService {
         this.makeForecastWeatherObject(v);
       },
       error: (e: any) => console.error(e),
-      complete: () => console.info('complete'),
+      complete: () => console.info('complete: getForcastData'),
     });
   }
 
@@ -82,7 +82,8 @@ export class RequestRxService {
     });
     datas.rain = request.rain?.['1h'];
     datas.snow = request.snow?.['1h'];
-    this.curWeaDatasArr.push(datas)
+    this.curWeaDatasArr.push(datas);
+    this.curWeaDatasArr = [...new Map(this.curWeaDatasArr.map(item => [item.location, item])).values()];
   }
 
   makeForecastWeatherObject(request: forecastWeatherObject) { 
@@ -107,6 +108,6 @@ export class RequestRxService {
       datas.snow = request.list[i].snow?.['3h'];
       this.forcastWearherData.forecastArr.push(datas);
     }
-  }
+  } 
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RequestRxService } from '../request-rx.service';
 import { Coord } from '../types_interfaces';
+import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-current',
@@ -9,16 +10,17 @@ import { Coord } from '../types_interfaces';
 })
 
 export class CurrentComponent implements OnInit, OnDestroy {
+  subscription: SubscriptionLike;
 
   constructor(public service: RequestRxService) {
   }  
 
   ngOnInit(): void {
     this.service.readNavigatorCoords()
-    this.service.coord$.subscribe({
+    this.subscription = this.service.coord$.subscribe({
       next: (v: Coord) => {
-        console.log(this.service.coord$.getValue())
         if(this.service.coord$.getValue().lat !== 0){
+          console.log(this.service.coord$.getValue())
           this.service.getCurrentData();
         }
       },
@@ -27,7 +29,8 @@ export class CurrentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.service.coord$.unsubscribe();
+    this.service.curWeaDatasArr = [];
+    this.subscription.unsubscribe();
   }
 
   deleteRow(index : number){

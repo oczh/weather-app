@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { RequestRxService } from '../request-rx.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { RequestRxService } from '../request-rx.service';
 })
 export class LocationFormComponent {
 
-  constructor(public requestRxServise: RequestRxService, private http: HttpClient) {}
+  constructor(public requestRxServise: RequestRxService) {}
   
   onSubmit(form: NgForm) {
     this.requestRxServise.getCoordinatesByQuery(form.value.location)
